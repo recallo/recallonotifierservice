@@ -1,0 +1,28 @@
+name: Daily Recall Check
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Every day at 12:00 UTC (adjust as needed)
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install firebase-admin requests
+
+      - name: Run script
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > serviceaccountkey.json
+          python main.py
