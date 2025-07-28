@@ -13,7 +13,7 @@ db = firestore.client()
 
 EMAIL = "recallohelp@gmail.com"
 PASSWORD = "sevg yzhl pbwq emos"
-HEADER_IMAGE_URL = "https://yourdomain.com/your-header-image.png"  # Replace this with your image URL
+HEADER_IMAGE_URL = "https://imgur.com/a/K58hrfM" 
 
 def send_email(to, subject, html_body):
     msg = MIMEMultipart("alternative")
