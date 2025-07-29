@@ -5,7 +5,7 @@ import smtplib
 from email.mime.text import MIMEText
 from urllib.parse import quote
 
-# Initialize Firebase
+
 cred = credentials.Certificate("serviceaccountkey.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
@@ -55,7 +55,6 @@ def check_recalls():
                         if not recall_number:
                             continue
 
-                        # Check if recall was already sent
                         sent_ref = db.collection("users").document(user_id).collection("sent_recalls").document(recall_number)
                         if sent_ref.get().exists:
                             continue
@@ -78,7 +77,7 @@ def check_recalls():
                         message = f"{med} by {firm} ({location}):\n{reason}"
                         new_recalls.append(message)
 
-                        # Record this recall as sent
+                       
                         sent_ref.set({"timestamp": firestore.SERVER_TIMESTAMP})
                 else:
                     print(f"API error for {med}: {response.text}")
